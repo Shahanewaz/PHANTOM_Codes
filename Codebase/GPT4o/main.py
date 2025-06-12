@@ -1,0 +1,156 @@
+import os
+import sys
+import random
+import openai
+
+import config
+import image_utils
+import openai_services
+
+def main():
+    # --- Initialize OpenAI API Key ---
+    openai_services.initialize_openai_api(config.OPENAI_API_KEY)
+    
+    if not openai.api_key:
+        print("Error: OpenAI API key not set. Please update config.py.")
+        sys.exit()
+
+    # --- Get list of all image files ---
+    all_image_files = [f for f in os.listdir(config.SOURCE_IMAGES_DIR) if f.endswith('.jpg') and os.path.isfile(os.path.join(config.SOURCE_IMAGES_DIR, f))]
+
+    if len(all_image_files) < 2:
+        print(f"Error: Not enough image files in {config.SOURCE_IMAGES_DIR} to select both source and target.")
+        sys.exit()
+
+    # --- Initial Selection of Source and Target Images ---
+    selected_images = random.sample(all_image_files, 2)
+    source_img_name = selected_images[0]
+    initial_target_img_name = selected_images[1]
+
+    source_num = os.path.splitext(source_img_name)[0]
+    target_num = os.path.splitext(initial_target_img_name)[0]
+
+    # --- Create a unique subfolder for this run ---
+    run_result_dir = os.path.join(config.BASE_RESULT_DIR, f"src_{source_num}_tar_{target_num}")
+
+    try:
+        os.makedirs(run_result_dir, exist_ok=True)
+        print(f"Created results subdirectory: {run_result_dir}")
+        
+    except OSError as e:
+        print(f"Error creating results subdirectory {run_result_dir}: {e}")
+        sys.exit()
+
+    source_path = os.path.join(config.SOURCE_IMAGES_DIR, source_img_name)
+    initial_target_path = os.path.join(config.SOURCE_IMAGES_DIR, initial_target_img_name)
+
+    # --- Save copies of the initial source and target to the new subfolder ---
+    copied_source_path_in_result_dir = os.path.join(run_result_dir, f"initial_source_{source_img_name}")
+    copied_target_path_in_result_dir = os.path.join(run_result_dir, f"initial_target_{initial_target_img_name}")
+
+    if not image_utils.copy_image(source_path, copied_source_path_in_result_dir):
+        print("Failed to copy initial source image. Exiting.")
+        sys.exit()
+        
+    if not image_utils.copy_image(initial_target_path, copied_target_path_in_result_dir):
+        print("Failed to copy initial target image. Exiting.")
+        sys.exit()
+
+    current_target_path = copied_target_path_in_result_dir
+
+    print(f"Initial Source Image: {source_img_name} (copied to {os.path.basename(copied_source_path_in_result_dir)})")
+    print(f"Initial Target Image: {initial_target_img_name} (copied to {os.path.basename(copied_target_path_in_result_dir)})")
+
+
+    # --- Iteration Loop ---
+    for i in range(1, config.NUM_ITERATIONS + 1):
+        print(f"\n--- Starting Iteration {i} ---")
+        
+        print(f"Current Source for analysis: {os.path.basename(source_path)}")
+        print(f"Current Target for analysis: {os.path.basename(current_target_path)}")
+
+        current_target_image_b64 = image_utils.encode_image_to_base64(current_target_path)
+        source_image_b64 = image_utils.encode_image_to_base64(source_path)
+
+        if not current_target_image_b64 or not source_image_b64:
+            print("Failed to encode images. Exiting.")
+            sys.exit()
+
+        # --- Step 1: Get Visual Differences ---
+        print("\n--- Step 1: Getting Visual Differences ---")
+        
+        diff_text = openai_services.get_visual_differences(source_image_b64, current_target_image_b64)
+        
+        if diff_text is None: # get_visual_differences returns None on failure/unsuccessful
+            print(f"Failed to get visual differences in iteration {i}. Exiting script.")
+            sys.exit()
+            
+        print("Visual Differences:\n", diff_text)
+
+
+        # --- Step 2: Generate Edit Instructions ---
+        print("\n--- Step 2: Generating Edit Instructions ---")
+        
+        edit_prompt = openai_services.generate_edit_instructions(diff_text)
+        
+        if edit_prompt is None:
+            print(f"Failed to generate edit instructions in iteration {i}. Exiting script.")
+            sys.exit()
+            
+        print("Generated edit prompt:\n", edit_prompt)
+
+        edit_prompt_filename = os.path.join(run_result_dir, f"edit_prompt_iteration_{i}.txt")
+        
+        with open(edit_prompt_filename, "w") as f:
+            f.write(edit_prompt)
+            
+        print(f"Edit prompt saved to {edit_prompt_filename}")
+
+
+        # --- Step 3: Get a concise description of the CURRENT TARGET image ---
+        print("\n--- Step 3: Analyzing Current Target Image ---")
+        
+        target_description = openai_services.get_target_description(current_target_image_b64)
+        
+        if target_description is None: 
+            print(f"Failed to get target image description in iteration {i}. Exiting script.")
+            sys.exit()
+            
+        print("Current Target Image Description:\n", target_description)
+
+
+        # --- Step 4: Combine for GPT4 Generation Prompt ---
+        final_gpt4_prompt = (
+            f"Based on the following description of a person:\n{target_description}\n\n"
+            f"Apply these modifications to the person and the scene:\n{edit_prompt}\n\n"
+            "Generate a **highly realistic, photorealistic image** of this person with the applied changes. "
+            "The image should resemble a **professional studio portrait** or a **high-resolution photograph** "
+            "with natural lighting and intricate detail. Absolutely **no artistic styles, paintings, cartoons, "
+            "illustrations, or abstract elements**. Focus on a true-to-life, natural appearance, as if taken by a professional photographer."
+        )
+        
+        print("\nFinal GPT-4 Generation Prompt:\n", final_gpt4_prompt)
+
+
+        # --- Step 5: Generate the edited image using GPT4 (with retry logic) ---
+        print("\n--- Step 5: Generating Edited Image with GPT4 ---")
+        try:
+            generated_image_b64 = openai_services.generate_gpt4_image(final_gpt4_prompt)
+            print(f"Generated image base64 (GPT4, Iteration {i}): {generated_image_b64}")
+            
+            output_filename = os.path.join(run_result_dir, f"generated_image_N={i}.png")
+            
+            if not image_utils.save_image_from_b64(generated_image_b64, output_filename):
+                print(f"Failed to save generated image for iteration {i}. Exiting.")
+                sys.exit()
+
+            current_target_path = output_filename
+
+        except Exception as e: 
+            print(f"An error occurred duringGPT4 generation in Iteration {i}: {e}")
+            sys.exit()
+
+    print("\n--- All iterations complete! ---")
+
+if __name__ == "__main__":
+    main()
