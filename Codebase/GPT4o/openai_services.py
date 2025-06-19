@@ -72,7 +72,8 @@ def generate_edit_instructions(diff_text):
         "to resemble a **source image of an individual**. Identify the visual attributes of the individual "
         "in the source image and provide instructions to apply those attributes to the individual in the target image. "
         "Do not mention 'the source image' or 'the first image' explicitly in the instructions as a reference. "
-        "Just state what needs to be changed in the target image to make the individual within it match the individual in the source.\n\n"
+        "Just state what needs to be changed in the target image to make the individual within it match the individual in the source."
+        "The resulting image should reflect a balance between the original identity, pose, and structure of the target, and the key visual features (like hairstyle, expression, clothing, or background) of the source.\n\n"
         "For example, if the source image shows a person with blond hair and the target shows a person with brown hair, "
         "instead of saying:\n- 'Change the hair to match that of the source image.'\n"
         "Say:\n- 'Change the hair color to blond and adjust the style accordingly.'\n\n"
@@ -113,7 +114,7 @@ def generate_edit_instructions(diff_text):
         return None
 
 # --- GPT-4o Call for Target Image Description ---
-def get_target_description(target_image_b64):
+def get_description(target_image_b64):
     """
     Gets a concise description of the target image using GPT-4o.
     """

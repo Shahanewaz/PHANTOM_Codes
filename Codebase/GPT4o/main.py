@@ -2,6 +2,7 @@ import os
 import sys
 import random
 import openai
+import shutil
 
 import config
 import image_utils
@@ -55,12 +56,12 @@ def main():
     if not image_utils.copy_image(initial_target_path, copied_target_path_in_result_dir):
         print("Failed to copy initial target image. Exiting.")
         sys.exit()
+        
 
     current_target_path = copied_target_path_in_result_dir
 
     print(f"Initial Source Image: {source_img_name} (copied to {os.path.basename(copied_source_path_in_result_dir)})")
     print(f"Initial Target Image: {initial_target_img_name} (copied to {os.path.basename(copied_target_path_in_result_dir)})")
-
 
     # --- Iteration Loop ---
     for i in range(1, config.NUM_ITERATIONS + 1):
@@ -75,6 +76,8 @@ def main():
         if not current_target_image_b64 or not source_image_b64:
             print("Failed to encode images. Exiting.")
             sys.exit()
+            
+        source_description = openai_services.get_description(source_image_b64)
 
         # --- Step 1: Get Visual Differences ---
         print("\n--- Step 1: Getting Visual Differences ---")
@@ -110,7 +113,7 @@ def main():
         # --- Step 3: Get a concise description of the CURRENT TARGET image ---
         print("\n--- Step 3: Analyzing Current Target Image ---")
         
-        target_description = openai_services.get_target_description(current_target_image_b64)
+        target_description = openai_services.get_description(current_target_image_b64)
         
         if target_description is None: 
             print(f"Failed to get target image description in iteration {i}. Exiting script.")
@@ -121,12 +124,14 @@ def main():
 
         # --- Step 4: Combine for GPT4 Generation Prompt ---
         final_gpt4_prompt = (
-            f"Based on the following description of a person:\n{target_description}\n\n"
-            f"Apply these modifications to the person and the scene:\n{edit_prompt}\n\n"
+            f"The following is a description of the target image:\n{target_description}\n\n"
+            f"And this is a description of the source image whose visual attributes should be adopted:\n{source_description}\n\n"
+            f"Based on these descriptions, apply the following visual modifications to the target while preserving the original person's identity, pose, and structural features:\n{edit_prompt}\n\n"
             "Generate a **highly realistic, photorealistic image** of this person with the applied changes. "
-            "The image should resemble a **professional studio portrait** or a **high-resolution photograph** "
-            "with natural lighting and intricate detail. Absolutely **no artistic styles, paintings, cartoons, "
-            "illustrations, or abstract elements**. Focus on a true-to-life, natural appearance, as if taken by a professional photographer."
+            "The result should visually balance the **target's core identity and pose** with the **source's visual style and attributes**. "
+            "Ensure the output resembles a **professional studio portrait** or a **high-resolution natural photograph** "
+            "with natural lighting and intricate detail. Avoid all artistic styles, paintings, cartoons, illustrations, or abstract elements. "
+            "The image should look **true-to-life**, as if captured by a professional photographer."
         )
         
         print("\nFinal GPT-4 Generation Prompt:\n", final_gpt4_prompt)
@@ -134,17 +139,35 @@ def main():
 
         # --- Step 5: Generate the edited image using GPT4 (with retry logic) ---
         print("\n--- Step 5: Generating Edited Image with GPT4 ---")
+        
         try:
             generated_image_b64 = openai_services.generate_gpt4_image(final_gpt4_prompt)
-            print(f"Generated image base64 (GPT4, Iteration {i}): {generated_image_b64}")
+            print(f"Image has been edited for iteration {i}.")
             
-            output_filename = os.path.join(run_result_dir, f"generated_image_N={i}.png")
+            temp_output_filename = os.path.join(run_result_dir, f"temp_generated_image_N={i}.png")
             
-            if not image_utils.save_image_from_b64(generated_image_b64, output_filename):
+            if not image_utils.save_image_from_b64(generated_image_b64, temp_output_filename):
                 print(f"Failed to save generated image for iteration {i}. Exiting.")
                 sys.exit()
 
-            current_target_path = output_filename
+            score_current = image_utils.evaluate_image_quality(current_target_path, source_path)
+            score_new = image_utils.evaluate_image_quality(temp_output_filename, source_path)
+
+            print(f"Metric scores - Current: {score_current:.4f}, New: {score_new:.4f}")
+
+            final_output_filename = os.path.join(run_result_dir, f"generated_image_N={i}.png")
+
+            if score_new > score_current:
+                print("New image improved the metric. Saving and updating target.")
+                os.replace(temp_output_filename, final_output_filename)
+                current_target_path = final_output_filename
+                
+            else:
+                print("New image did not improve the metric. Keeping previous image.")
+                os.remove(temp_output_filename)
+
+                shutil.copy(current_target_path, final_output_filename)
+                print(f"Copied previous image to {final_output_filename} for iteration {i}.")
 
         except Exception as e: 
             print(f"An error occurred duringGPT4 generation in Iteration {i}: {e}")
