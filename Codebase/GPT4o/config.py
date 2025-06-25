@@ -1,14 +1,30 @@
 import os
 
 # --- OpenAI API Key ---
-OPENAI_API_KEY = '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'
+OPENAI_API_KEY = ''
+# OPENAI_API_KEY = ''
 
 # --- Directory Paths ---
 # Directory containing source images (e.g., CelebA-HQ)
-SOURCE_IMAGES_DIR = "../../CelebA-HQ/celeba_hq_256"
+SOURCE_IMAGES_DIR = "../../CelebA-HQ/celeba_hq_256/race_caucasian/male"
+TARGET_IMAGES_DIR = "../../CelebA-HQ/celeba_hq_256/race_caucasian/male"
+
+def extract_race_gender(path):
+    gender = os.path.basename(path)
+    race_folder = os.path.basename(os.path.dirname(path))
+    race = race_folder.replace("race_", "")
+    return race, gender
+
+source_race, source_gender = extract_race_gender(SOURCE_IMAGES_DIR)
+target_race, target_gender = extract_race_gender(TARGET_IMAGES_DIR)
 
 # Base directory for all results (a subfolder will be created inside this for each run)
-BASE_RESULT_DIR = "../../Result/GPT4o"
+BASE_RESULT_DIR = os.path.join(
+    "../../Result/GPT4o/same_race_same_gender",
+    f"{source_race}_{source_gender}_to_{target_race}_{target_gender}"
+)
+
+os.makedirs(BASE_RESULT_DIR, exist_ok = True)
 
 # --- API Parameters ---
 GPT4O_MAX_TOKENS_DIFF = 700
@@ -21,7 +37,10 @@ GPT4_SIZE = "1024x1024"
 GPT4_QUALITY = "auto"
 
 # --- Iteration Settings ---
-NUM_ITERATIONS = 10 
+NUM_ITERATIONS = 20
+PERCENTAGE = 0.35
+MAX_ATTEMPTS = 10
+EPSILON_THRES = 0.01
 
 # --- Conditional Exit Keywords ---
 UNSUCCESSFUL_KEYWORDS = [
