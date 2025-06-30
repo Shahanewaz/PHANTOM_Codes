@@ -168,6 +168,6 @@ We quantitatively assessed photorealism using Naturalness Image Quality Evaluato
 
 | Setting      | GPT-4o | OmniGen2 |
 |--------------|:------:|:--------:|
-| Within-Group |  4.67  |   6.08   |
+| Within-Group |  4.73  |   6.12   |
 
 </div>
