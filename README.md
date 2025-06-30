@@ -52,3 +52,9 @@ PHANTOM is operated through the following sequence of integrated modules:
 - **Prompt-Guided Update Module:** At this module, the LLM generates an updated image based on the latest edit instructions. PHANTOM then evaluates its SSIM, and if the result satisfies the imposed constraints, the image is accepted for the next editing round.
 
 We will show the flowchart below.
+
+<p align="center">
+  <img src="Figures/flowchart.png" alt="flowchart of PHANTOM" width="65%">
+</p>
+
+*Figure 2. A single iteration of the PHANTOM framework.*
