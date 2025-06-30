@@ -80,3 +80,13 @@ To implement the methodology described, execute the following script with the sp
 <p align="center">
   <code>python select_llm.py</code>
 </p>
+
+# Evaluation Metrics
+
+## Structure-Aware Image Similarity (PSNR-SIG)
+
+PSNR-SIG metric enhances traditional PSNR by incorporating structural information. Unlike classical PSNR, which may miss perceptually important differences, PSNR-SIG better reflects human perception by emphasizing structural fidelity. This makes it well-suited for PHANTOM, where preserving both global and local details is critical for realistic identity impersonation.
+
+## LLM-Based Perceptual Similarity
+
+Alongside PSNR-SIG, we use state-of-the-art LLMs: GPT-4o, Claude 3.7 Sonnet, and Gemini 2.5 Flash, to assess perceptual similarity. Each model is prompted with a standardized query to rate similarity between SOURCE and OUTPUT images and TARGET and OUTPUT images on a [0, 1] scale.
