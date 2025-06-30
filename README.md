@@ -90,3 +90,15 @@ PSNR-SIG metric enhances traditional PSNR by incorporating structural informatio
 ## LLM-Based Perceptual Similarity
 
 Alongside PSNR-SIG, we use state-of-the-art LLMs: GPT-4o, Claude 3.7 Sonnet, and Gemini 2.5 Flash, to assess perceptual similarity. Each model is prompted with a standardized query to rate similarity between SOURCE and OUTPUT images and TARGET and OUTPUT images on a [0, 1] scale.
+
+# Main Results
+
+## PSNR-SIG Performance Analysis
+
+**Table:** Mean PSNR-SIG similarity scores between source–target, output–target, and output–source image pairs for each experimental setting. 🟢 (**↑**) marks a substantial increase in similarity, whereas ⚪ (**↓**) marks only a modest reduction.
+
+| **Setting**     | **Src–Tgt** | **Out–Tgt**          | **Out–Src**          |
+|-----------------|-------------|----------------------|----------------------|
+| Within-Group    | 0.27        | 0.93 🟢 (**↑**)       | 0.89 ⚪ (**↓**)       |
+| Across-Gender   | 0.27        | 0.93 🟢 (**↑**)       | 0.90 ⚪ (**↓**)       |
+| Across-Race     | 0.25        | 0.93 🟢 (**↑**)       | 0.89 ⚪ (**↓**)       |
