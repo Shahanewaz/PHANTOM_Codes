@@ -15,7 +15,7 @@ In this framework, we consider an attacker image (referred to as the *source ima
     <img src="Figures/ex1.png"
          alt="Impersonation within the same gender"
          style="width: 100%;">
-    <figcaption >
+    <figcaption style="font-style: italic; margin-top: 0.5em;">
       (a) Impersonation within the same gender
     </figcaption>
   </figure>
@@ -162,3 +162,5 @@ After deriving the optimized edit prompt with the PHANTOM framework, we initiall
 <p align="center" style="font-style: bold;">
   Figure 3. Comparison of PHANTOM-optimized edits using the same prompt: from left to right, source image, GPT-4o edited output, OmniGen2 edited output, and target image.
 </p>
+
+To ensure that these edits not only convey the correct content but also exhibit naturalistic texture and lighting, we proceed to evaluate their photorealism using objective image-quality metrics. Thus, we quantitatively assessed photorealism in our within-group setting by computing Naturalness Image Quality Evaluator (NIQE) scores per model. As can be seen from Table below, GPT-4o achieved a mean NIQE of $4.67$, indicating closer alignment with natural image statistics, while OmniGen2 produced a mean NIQE of $6.08$, reflecting modest smoothing of high-frequency details. Nonetheless, both models maintained comparable lighting consistency and color fidelity with no pronounced artifacts, supporting OmniGen2’s viability as an open-source substitute.
