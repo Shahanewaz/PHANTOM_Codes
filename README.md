@@ -37,7 +37,7 @@ In this framework, we consider an attacker image (referred to as the *source ima
 
 </div>
 
-<p align="center" style="font-style: italic;">
+<p align="center" style="font-style: bold;">
   Figure 1. PHANTOM-generated impersonation attacks in same-gender (a) and different-gender (b) scenarios.
 </p>
 
@@ -57,4 +57,6 @@ We will show the flowchart below.
   <img src="Figures/flowchart.PNG" alt="flowchart of PHANTOM" width="65%">
 </p>
 
-*Figure 2. A single iteration of the PHANTOM framework.*
+<p align="center" style="font-style: bold;">
+  Figure 2. A single iteration of the PHANTOM framework.
+</p>
