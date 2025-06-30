@@ -1,31 +1,28 @@
 # PHANTOM: Prompt-based Human Attribute Navigation for Targeted Obfuscation with Multimodal Large Language Models
 This repository contains the codebase for manuscript titled "PHANTOM: Prompt-based Human Attribute Navigation for Targeted Obfuscation with Multimodal Large Language Models"
 
-<!-- wrap both figures in a single centered container -->
-<div style="display: flex; justify-content: center; align-items: flex-start; gap: 1em;">
+<div style="text-align: center;">
 
-  <!-- first image -->
-  <figure style="margin: 0;">
+  <figure style="display: inline-block; width: 40%; margin: 0 1em; vertical-align: top;">
     <img src="Figures/ex1.png"
          alt="Impersonation within the same gender"
-         style="width: 40%;">
-    <figcaption style="text-align: center; font-style: italic;">
+         style="width: 100%;">
+    <figcaption style="font-style: italic;">
       (a) Impersonation within the same gender
     </figcaption>
   </figure>
 
-  <!-- second image -->
-  <figure style="margin: 0;">
+  <figure style="display: inline-block; width: 40%; margin: 0 1em; vertical-align: top;">
     <img src="Figures/ex2.png"
          alt="Impersonation with different genders"
-         style="width: 40%;">
-    <figcaption style="text-align: center; font-style: italic;">
+         style="width: 100%;">
+    <figcaption style="font-style: italic;">
       (b) Impersonation with different genders
     </figcaption>
   </figure>
 
 </div>
 
-<p style="text-align:center; font-style: italic;">
-  Figure 1. PHANTOM-generated impersonation attacks in same-gender (a) and different-gender (b) scenario.
+<p align="center" style="font-style: italic;">
+  Figure 1. PHANTOM-generated impersonation attacks in same-gender (a) and different-gender (b) scenarios.
 </p>
