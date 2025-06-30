@@ -54,7 +54,7 @@ PHANTOM is operated through the following sequence of integrated modules:
 We will show the flowchart below.
 
 <p align="center">
-  <img src="Figures/flowchart.png" alt="flowchart of PHANTOM" width="65%">
+  <img src="Figures/flowchart.PNG" alt="flowchart of PHANTOM" width="65%">
 </p>
 
 *Figure 2. A single iteration of the PHANTOM framework.*
