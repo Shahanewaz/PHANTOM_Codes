@@ -1,5 +1,7 @@
 # PHANTOM: Prompt-based Human Attribute Navigation for Targeted Obfuscation with Multimodal Large Language Models
-This repository contains the codebase for manuscript titled "PHANTOM: Prompt-based Human Attribute Navigation for Targeted Obfuscation with Multimodal Large Language Models"
+This repository contains the codebase for the manuscript titled **"PHANTOM: Prompt-based Human Attribute Navigation for Targeted Obfuscation with Multimodal Large Language Models."**
+
+In this framework, we consider an attacker image (referred to as the *source image* in the manuscript) and a victim image (the *target image* in the manuscript). The purpose of PHANTOM is to generate an intermediate image that an attacker can use to effectively impersonate the victim by systematically modifying human attributes guided by multimodal large language models.
 
 <div style="text-align: center;">
 
@@ -38,3 +40,15 @@ This repository contains the codebase for manuscript titled "PHANTOM: Prompt-bas
 <p align="center" style="font-style: italic;">
   Figure 1. PHANTOM-generated impersonation attacks in same-gender (a) and different-gender (b) scenarios.
 </p>
+
+# Flowchart of PHANTOM
+
+PHANTOM is operated through the following sequence of integrated modules:
+
+- **Initialization Module:** Each iteration in PHANTOM begins with the current updated image, along with the fixed source and target images.
+
+- **Analysis Module:** Next, PHANTOM compares the source and target images using the LLM, identifying key visual differences (e.g., facial structure, hairstyle, skin tone, background) and translating them into precise editing instructions. It also evaluates how each change affects SSIM to prioritize edits that better align the source with the target.
+
+- **Prompt-Guided Update Module:** At this module, the LLM generates an updated image based on the latest edit instructions. PHANTOM then evaluates its SSIM, and if the result satisfies the imposed constraints, the image is accepted for the next editing round.
+
+We will show the flowchart below.
