@@ -72,3 +72,11 @@ We will show the flowchart below.
 │ │ └── openai_services.py
 │ └── select_llm.py
 ```
+
+# Usage Instructions
+
+To implement the methodology described, execute the following script with the specified number of iterations.
+
+<p align="center">
+  <code>python select_llm.py</code>
+</p>
