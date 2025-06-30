@@ -60,3 +60,15 @@ We will show the flowchart below.
 <p align="center" style="font-style: bold;">
   Figure 2. A single iteration of the PHANTOM framework.
 </p>
+
+# Folder Structure
+
+```
+├── Codebase
+│ ├── GPT4o
+│ │ ├── config.py
+│ │ └── image_utils.py
+│ │ └── main.py
+│ │ └── openai_services.py
+│ └── select_llm.py
+```
