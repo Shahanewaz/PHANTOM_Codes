@@ -6,39 +6,34 @@ In this framework, we consider an attacker image (referred to as the *source ima
 <div style="text-align: center;">
 
   <figure style="
-  display: inline-block;
-  width: 45%;
-  margin: 0 1em;
-  vertical-align: top;
-  text-align: center;
-">
-  <img src="Figures/ex1.png"
-       alt="Impersonation within the same gender"
-       style="width: 100%;">
-  <figcaption style="font-style: italic; margin-top: 0.5em;">
-    <div style="display: inline-block; width: 100%; text-align: center;">
+    display: inline-block;
+    width: 45%;
+    margin: 0 1em;
+    vertical-align: top;
+  ">
+    <img src="Figures/ex1.png"
+         alt="Impersonation within the same gender"
+         style="width: 100%;">
+    <figcaption style="font-style: italic; margin-top: 0.5em; text-align: center;">
       (a) Impersonation within the same gender
-    </div>
-  </figcaption>
-</figure>
+    </figcaption>
+  </figure>
 
   <figure style="
-      display: inline-block;
-      width: 45%;
-      margin: 0 1em;
-      vertical-align: top;
-      text-align: center;  
+    display: inline-block;
+    width: 45%;
+    margin: 0 1em;
+    vertical-align: top;
   ">
     <img src="Figures/ex2.png"
          alt="Impersonation with different genders"
          style="width: 100%;">
-    <figcaption style="font-style: italic; margin-top: 0.5em;">
+    <figcaption style="font-style: italic; margin-top: 0.5em; text-align: center;">
       (b) Impersonation with different genders
     </figcaption>
   </figure>
 
 </div>
-
 <p align="center" style="font-style: bold;">
   Figure 1. PHANTOM-generated impersonation attacks in same-gender (a) and different-gender (b) scenarios.
 </p>
