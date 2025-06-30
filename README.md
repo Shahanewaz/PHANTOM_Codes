@@ -153,14 +153,24 @@ Alongside PSNR-SIG, we use state-of-the-art LLMs: GPT-4o, Claude 3.7 Sonnet, and
 
 ## OmniGen2 vs GPT-4o?
 
-After deriving the optimized edit prompt with the PHANTOM framework, we initially combined this prompt with the source and target images and submitted the trio to GPT-4o to obtain an edited result. Because GPT-4o is a proprietary, API-restricted model, we next sought an open-source alternative and selected OmniGen2. Visually, the edited image retains the high-level semantic structure of the target, similar to the GPT-4o result, while precisely implementing the specified modifications, as can be seen from the Figure below.
+After deriving the optimized edit prompt with PHANTOM, we initially used GPT-4o to obtain an edited image from source and target inputs. Due to GPT-4o's proprietary nature, we later utilized OmniGen2, an open-source alternative. Both models effectively retained the semantic structure of the target while applying specified edits, as shown in Figure 3.
 
 <p align="center">
   <img src="Figures/omnigen_image.PNG" alt="OmniGen2 Image" width="65%">
 </p>
 
-<p align="center" style="font-style: bold;">
-  Figure 3. Comparison of PHANTOM-optimized edits using the same prompt: from left to right, source image, GPT-4o edited output, OmniGen2 edited output, and target image.
+<p align="center" style="font-weight: bold;">
+  Figure 3. Comparison of PHANTOM-optimized edits using the same prompt: source image, GPT-4o output, OmniGen2 output, and target image (left to right).
 </p>
 
-To ensure that these edits not only convey the correct content but also exhibit naturalistic texture and lighting, we proceed to evaluate their photorealism using objective image-quality metrics. Thus, we quantitatively assessed photorealism in our within-group setting by computing Naturalness Image Quality Evaluator (NIQE) scores per model. As can be seen from Table below, GPT-4o achieved a mean NIQE of $4.67$, indicating closer alignment with natural image statistics, while OmniGen2 produced a mean NIQE of $6.08$, reflecting modest smoothing of high-frequency details. Nonetheless, both models maintained comparable lighting consistency and color fidelity with no pronounced artifacts, supporting OmniGen2’s viability as an open-source substitute.
+We quantitatively assessed photorealism using Naturalness Image Quality Evaluator (NIQE) scores in a within-group setting. GPT-4o achieved a mean NIQE score of 4.67, demonstrating superior alignment with natural image statistics, whereas OmniGen2 scored 6.08, indicating slight smoothing. Nonetheless, both maintained good lighting consistency and color fidelity, affirming OmniGen2 as a viable open-source alternative.
+
+<div align="center">
+
+**Table 4.** Mean NIQE scores for GPT-4o and OmniGen2, where lower scores indicate better photorealism.
+
+| Setting      | GPT-4o | OmniGen2 |
+|--------------|:------:|:--------:|
+| Within-Group |  4.67  |   6.08   |
+
+</div>
