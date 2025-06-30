@@ -95,10 +95,14 @@ Alongside PSNR-SIG, we use state-of-the-art LLMs: GPT-4o, Claude 3.7 Sonnet, and
 
 ## PSNR-SIG Performance Analysis
 
-**Table:** Mean PSNR-SIG similarity scores between source–target, output–target, and output–source image pairs for each experimental setting. 🟢 (**↑**) marks a substantial increase in similarity, whereas ⚪ (**↓**) marks only a modest reduction.
+<div align="center">
 
-| **Setting**     | **Src–Tgt** | **Out–Tgt**          | **Out–Src**          |
-|-----------------|-------------|----------------------|----------------------|
-| Within-Group    | 0.27        | 0.93 🟢 (**↑**)       | 0.89 ⚪ (**↓**)       |
-| Across-Gender   | 0.27        | 0.93 🟢 (**↑**)       | 0.90 ⚪ (**↓**)       |
-| Across-Race     | 0.25        | 0.93 🟢 (**↑**)       | 0.89 ⚪ (**↓**)       |
+**Table:** Mean PSNR-SIG similarity scores between source–target, output–target, and output–source image pairs for each experimental setting. <span style="color:green;">↑</span> marks a substantial increase in similarity, whereas <span style="color:gray;">↓</span> marks only a modest reduction.
+
+| **Setting**     | **Src–Tgt** | **Out–Tgt**       | **Out–Src**       |
+|-----------------|:-----------:|:-----------------:|:-----------------:|
+| Within-Group    |     0.27    |  0.93 <span style="color:green;">↑</span> | 0.89 <span style="color:gray;">↓</span> |
+| Across-Gender   |     0.27    |  0.93 <span style="color:green;">↑</span> | 0.90 <span style="color:gray;">↓</span> |
+| Across-Race     |     0.25    |  0.93 <span style="color:green;">↑</span> | 0.89 <span style="color:gray;">↓</span> |
+
+</div>
