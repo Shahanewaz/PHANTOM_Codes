@@ -3,20 +3,32 @@ This repository contains the codebase for manuscript titled "PHANTOM: Prompt-bas
 
 <div style="text-align: center;">
 
-  <figure style="display: inline-block; width: 40%; margin: 0 1em; vertical-align: top;">
+  <figure style="
+      display: inline-block;
+      width: 40%;
+      margin: 0 1em;
+      vertical-align: top;
+      text-align: center;   /* center the caption */
+  ">
     <img src="Figures/ex1.png"
          alt="Impersonation within the same gender"
          style="width: 100%;">
-    <figcaption style="font-style: italic;">
+    <figcaption style="font-style: italic; margin-top: 0.5em;">
       (a) Impersonation within the same gender
     </figcaption>
   </figure>
 
-  <figure style="display: inline-block; width: 40%; margin: 0 1em; vertical-align: top;">
+  <figure style="
+      display: inline-block;
+      width: 40%;
+      margin: 0 1em;
+      vertical-align: top;
+      text-align: center;   /* center the caption */
+  ">
     <img src="Figures/ex2.png"
          alt="Impersonation with different genders"
          style="width: 100%;">
-    <figcaption style="font-style: italic;">
+    <figcaption style="font-style: italic; margin-top: 0.5em;">
       (b) Impersonation with different genders
     </figcaption>
   </figure>
