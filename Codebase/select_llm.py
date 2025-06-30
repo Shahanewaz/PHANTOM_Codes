@@ -10,7 +10,7 @@ def select_and_run_llm_script():
     }
 
     while True:
-        choice = 1
+        choice = "1"
         
         if choice in llm_choices:
             break
