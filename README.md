@@ -6,19 +6,20 @@ In this framework, we consider an attacker image (referred to as the *source ima
 <div style="text-align: center;">
 
   <figure style="
-      display: inline-block;
-      width: 45%;
-      margin: 0 1em;
-      vertical-align: top;
-      text-align: center;  
-  ">
-    <img src="Figures/ex1.png"
-         alt="Impersonation within the same gender"
-         style="width: 100%;">
-    <figcaption style="font-style: italic; margin-top: 0.5em; text-align: center;">
-      (a) Impersonation within the same gender
-    </figcaption>
-  </figure>
+  display: table;
+  width: 45%;
+  margin: 0 1em;
+  vertical-align: top;
+  text-align: center;
+">
+  <img src="Figures/ex1.png"
+       alt="Impersonation within the same gender"
+       style="width: 100%;">
+  <figcaption style="font-style: italic; margin-top: 0.5em;">
+    (a) Impersonation within the same gender
+  </figcaption>
+</figure>
+
 
   <figure style="
       display: inline-block;
