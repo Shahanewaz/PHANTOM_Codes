@@ -8,7 +8,7 @@ This repository contains the codebase for manuscript titled "PHANTOM: Prompt-bas
   <figure style="margin: 0;">
     <img src="Figures/ex1.png"
          alt="Impersonation within the same gender"
-         style="width: 45%;">
+         style="width: 40%;">
     <figcaption style="text-align: center; font-style: italic;">
       (a) Impersonation within the same gender
     </figcaption>
@@ -18,7 +18,7 @@ This repository contains the codebase for manuscript titled "PHANTOM: Prompt-bas
   <figure style="margin: 0;">
     <img src="Figures/ex2.png"
          alt="Impersonation with different genders"
-         style="width: 45%;">
+         style="width: 40%;">
     <figcaption style="text-align: center; font-style: italic;">
       (b) Impersonation with different genders
     </figcaption>
@@ -27,5 +27,5 @@ This repository contains the codebase for manuscript titled "PHANTOM: Prompt-bas
 </div>
 
 <p style="text-align:center; font-style: italic;">
-  Figure 1. PHANTOM-generated impersonation attacks in same-gender (left) and different-gender (right) scenario.
+  Figure 1. PHANTOM-generated impersonation attacks in same-gender (a) and different-gender (b) scenario.
 </p>
