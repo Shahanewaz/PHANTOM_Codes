@@ -39,11 +39,15 @@ def main():
         sys.exit()
 
     # --- Initial Selection of Source and Target Images ---
-    source_img_name = random.choice(source_image_files)
-    initial_target_img_name = random.choice(target_image_files)
+    while True:
+        source_img_name = random.choice(source_image_files)
+        initial_target_img_name = random.choice(target_image_files)
 
-    source_num = os.path.splitext(source_img_name)[0]
-    target_num = os.path.splitext(initial_target_img_name)[0]
+        source_num = os.path.splitext(source_img_name)[0]
+        target_num = os.path.splitext(initial_target_img_name)[0]
+        
+        if source_num != target_num:
+            break
 
     # --- Create a unique subfolder for this run ---
     source_gender = os.path.basename(config.SOURCE_IMAGES_DIR) 

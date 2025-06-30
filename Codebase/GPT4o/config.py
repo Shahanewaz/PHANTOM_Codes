@@ -2,12 +2,11 @@ import os
 
 # --- OpenAI API Key ---
 OPENAI_API_KEY = ''
-# OPENAI_API_KEY = ''
 
 # --- Directory Paths ---
 # Directory containing source images (e.g., CelebA-HQ)
-SOURCE_IMAGES_DIR = "../../CelebA-HQ/celeba_hq_256/race_caucasian/male"
-TARGET_IMAGES_DIR = "../../CelebA-HQ/celeba_hq_256/race_caucasian/male"
+SOURCE_IMAGES_DIR = "../../CelebA-HQ/celeba_hq_256/race_african/female"
+TARGET_IMAGES_DIR = "../../CelebA-HQ/celeba_hq_256/race_caucasian/female"
 
 def extract_race_gender(path):
     gender = os.path.basename(path)
@@ -20,8 +19,8 @@ target_race, target_gender = extract_race_gender(TARGET_IMAGES_DIR)
 
 # Base directory for all results (a subfolder will be created inside this for each run)
 BASE_RESULT_DIR = os.path.join(
-    "../../Result/GPT4o/same_race_same_gender",
-    f"{source_race}_{source_gender}_to_{target_race}_{target_gender}"
+    "../../Result/GPT4o/different_race_same_gender",
+    f"{target_race}_{target_gender}_to_{source_race}_{source_gender}"
 )
 
 os.makedirs(BASE_RESULT_DIR, exist_ok = True)
