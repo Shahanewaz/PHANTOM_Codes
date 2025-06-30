@@ -15,7 +15,7 @@ In this framework, we consider an attacker image (referred to as the *source ima
     <img src="Figures/ex1.png"
          alt="Impersonation within the same gender"
          style="width: 100%;">
-    <figcaption style="font-style: italic; margin-top: 0.5em;">
+    <figcaption >
       (a) Impersonation within the same gender
     </figcaption>
   </figure>
