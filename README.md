@@ -97,7 +97,7 @@ Alongside PSNR-SIG, we use state-of-the-art LLMs: GPT-4o, Claude 3.7 Sonnet, and
 
 <div align="center">
 
-**Table:** Mean PSNR-SIG similarity scores between source–target, output–target, and output–source image pairs for each experimental setting. <span style="color:green;">↑</span> marks a substantial increase in similarity, whereas <span style="color:gray;">↓</span> marks only a modest reduction.
+**Table 1:** Mean PSNR-SIG similarity scores between source–target, output–target, and output–source image pairs for each experimental setting. <span style="color:green;">↑</span> marks a substantial increase in similarity, whereas <span style="color:gray;">↓</span> marks only a modest reduction.
 
 | **Setting**     | **Src–Tgt** | **Out–Tgt**       | **Out–Src**       |
 |-----------------|:-----------:|:-----------------:|:-----------------:|
@@ -111,7 +111,7 @@ Alongside PSNR-SIG, we use state-of-the-art LLMs: GPT-4o, Claude 3.7 Sonnet, and
 
 <div align="center">
 
-<b>Table:</b> LLM-based similarity between each source–target (Src–Tgt) and output–target (Out–Tgt) pair. The symbol <span style="color:green;">↑</span> marks the increase achieved after applying the PHANTOM framework.
+<b>Table 2:</b> LLM-based similarity between each source–target (Src–Tgt) and output–target (Out–Tgt) pair. The symbol <span style="color:green;">↑</span> marks the increase achieved after applying the PHANTOM framework.
 
 <table>
 <thead>
@@ -167,7 +167,7 @@ We quantitatively assessed photorealism using Naturalness Image Quality Evaluato
 
 <div align="center">
 
-**Table 4.** Mean NIQE scores for GPT-4o and OmniGen2, where lower scores indicate better photorealism.
+**Table 3.** Mean NIQE scores for GPT-4o and OmniGen2, where lower scores indicate better photorealism.
 
 | Setting      | GPT-4o | OmniGen2 |
 |--------------|:------:|:--------:|
