@@ -153,7 +153,7 @@ Alongside PSNR-SIG, we use state-of-the-art LLMs: GPT-4o, Claude 3.7 Sonnet, and
 After deriving the optimized edit prompt with PHANTOM, we initially used GPT-4o to obtain an edited image from source and target inputs. Due to GPT-4o's proprietary nature, we later utilized OmniGen2, an open-source alternative. Both models effectively retained the semantic structure of the target while applying specified edits, as shown in Figure 3.
 
 <p align="center">
-  <img src="Figures/omnigen_image.PNG" alt="OmniGen2 Image" width="65%">
+  <img src="Figures/omnigen_image_3.PNG" alt="OmniGen2 Image" width="65%">
 </p>
 
 <p align="center" style="font-weight: bold;">
