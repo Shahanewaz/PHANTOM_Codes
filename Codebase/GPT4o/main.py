@@ -5,9 +5,10 @@ import openai
 import shutil
 import datetime
 import time
+import cv2
 
 import config
-import image_utils
+import image_utils_deepface
 import openai_services
 
 def main():
@@ -39,6 +40,7 @@ def main():
         sys.exit()
 
     # --- Initial Selection of Source and Target Images ---
+    """
     while True:
         source_img_name = random.choice(source_image_files)
         initial_target_img_name = random.choice(target_image_files)
@@ -48,7 +50,18 @@ def main():
         
         if source_num != target_num:
             break
+    """
+    
+    while True:
+        initial_source_img_name = random.choice(source_image_files)
+        target_img_name = random.choice(target_image_files)
 
+        source_num = os.path.splitext(initial_source_img_name)[0]
+        target_num = os.path.splitext(target_img_name)[0]
+        
+        if source_num != target_num:
+            break
+    
     # --- Create a unique subfolder for this run ---
     source_gender = os.path.basename(config.SOURCE_IMAGES_DIR) 
     target_gender = os.path.basename(config.TARGET_IMAGES_DIR)
@@ -71,36 +84,63 @@ def main():
     except OSError as e:
         print(f"Error creating results subdirectory {run_result_dir}: {e}")
         sys.exit()
-
+    
+    """
     source_path = os.path.join(config.SOURCE_IMAGES_DIR, source_img_name)
     initial_target_path = os.path.join(config.TARGET_IMAGES_DIR, initial_target_img_name)
+    """
+    
+    initial_source_path = os.path.join(config.SOURCE_IMAGES_DIR, initial_source_img_name)
+    target_path = os.path.join(config.TARGET_IMAGES_DIR, target_img_name)
 
     # --- Save copies of the initial source and target to the new subfolder ---
+    """
     copied_source_path_in_result_dir = os.path.join(run_result_dir, f"initial_source_{source_img_name}")
     copied_target_path_in_result_dir = os.path.join(run_result_dir, f"initial_target_{initial_target_img_name}")
-
-    if not image_utils.copy_image(source_path, copied_source_path_in_result_dir):
+    """
+    
+    copied_source_path_in_result_dir = os.path.join(run_result_dir, f"initial_source_{initial_source_img_name}")
+    copied_target_path_in_result_dir = os.path.join(run_result_dir, f"initial_target_{target_img_name}")
+    
+    """
+    if not image_utils_deepface.copy_image(source_path, copied_source_path_in_result_dir):
         print("Failed to copy initial source image. Exiting.")
         sys.exit()
         
-    if not image_utils.copy_image(initial_target_path, copied_target_path_in_result_dir):
+    if not image_utils_deepface.copy_image(initial_target_path, copied_target_path_in_result_dir):
         print("Failed to copy initial target image. Exiting.")
         sys.exit()
+    """
+
+    if not image_utils_deepface.copy_image(initial_source_path, copied_source_path_in_result_dir):
+        print("Failed to copy initial source image. Exiting.")
+        sys.exit()
         
+    if not image_utils_deepface.copy_image(target_path, copied_target_path_in_result_dir):
+        print("Failed to copy initial target image. Exiting.")
+        sys.exit()
 
-    current_target_path = copied_target_path_in_result_dir
-
+    # current_target_path = copied_target_path_in_result_dir
+    
+    current_source_path = copied_source_path_in_result_dir
+    
+    """
     print(f"Initial Source Image: {source_img_name} (copied to {os.path.basename(copied_source_path_in_result_dir)})")
     print(f"Initial Target Image: {initial_target_img_name} (copied to {os.path.basename(copied_target_path_in_result_dir)})")
+    """
+    
+    print(f"Initial Source Image: {initial_source_img_name} (copied to {os.path.basename(copied_source_path_in_result_dir)})")
+    print(f"Initial Target Image: {target_img_name} (copied to {os.path.basename(copied_target_path_in_result_dir)})")
     
     log_file_path = os.path.join(run_result_dir, "score_log.txt")
     
-    initial_score = image_utils.evaluate_image_quality(current_target_path, source_path)
+    # initial_score = image_utils_deepface.evaluate_image_quality(current_target_path, source_path)
+    initial_score = image_utils_deepface.evaluate_image_quality(current_source_path, target_path)
     epsilon = config.PERCENTAGE * abs(initial_score)
     
     with open(log_file_path, "w") as log_file:
         log_file.write(f"Similarity Score Log - {datetime.datetime.now()}\n")
-        log_file.write(f"Initial Score (Iteration 0, Target vs. Source): {initial_score:.4f}\n\n")
+        log_file.write(f"Initial Score (Iteration 0, Source vs. Target): {initial_score:.4f}\n\n")
         
     diff_log_file_path = os.path.join(run_result_dir, "diff_log.txt")
     
@@ -112,21 +152,40 @@ def main():
     for i in range(1, config.NUM_ITERATIONS + 1):
         print(f"\n--- Starting Iteration {i} ---")
         
+        """
         print(f"Current Source for analysis: {os.path.basename(source_path)}")
         print(f"Current Target for analysis: {os.path.basename(current_target_path)}")
 
-        current_target_image_b64 = image_utils.encode_image_to_base64(current_target_path)
-        source_image_b64 = image_utils.encode_image_to_base64(source_path)
+        current_target_image_b64 = image_utils_deepface.encode_image_to_base64(current_target_path)
+        source_image_b64 = image_utils_deepface.encode_image_to_base64(source_path)
+        """
+        
+        print(f"Current Source for analysis: {os.path.basename(current_source_path)}")
+        print(f"Current Target for analysis: {os.path.basename(target_path)}")
 
+        current_source_image_b64 = image_utils_deepface.encode_image_to_base64(current_source_path)
+        target_image_b64 = image_utils_deepface.encode_image_to_base64(target_path)
+    
+        """
         if not current_target_image_b64 or not source_image_b64:
             print("Failed to encode images. Exiting.")
             sys.exit()
-
+        """
+        
+        if not current_source_image_b64 or not target_image_b64:
+            print("Failed to encode images. Exiting.")
+            sys.exit()
+        
         # --- Step 1: Get Visual Differences ---
         print("\n--- Step 1: Getting Visual Differences ---")
         
-        score_current = image_utils.evaluate_image_quality(current_target_path, source_path)
+        """
+        score_current = image_utils_deepface.evaluate_image_quality(current_target_path, source_path)
         diff_text = openai_services.get_visual_differences(source_image_b64, current_target_image_b64)
+        """
+        
+        score_current = image_utils_deepface.evaluate_image_quality(current_source_path, target_path)
+        diff_text = openai_services.get_visual_differences(current_source_image_b64, target_image_b64)
         
         if diff_text is None: # get_visual_differences returns None on failure/unsuccessful
             print(f"Failed to get visual differences in iteration {i}. Exiting script.")
@@ -138,7 +197,8 @@ def main():
         # --- Step 2: Generate Edit Instructions ---
         print("\n--- Step 2: Generating Edit Instructions ---")
         
-        edit_prompt = openai_services.generate_edit_instructions(diff_text, os.path.basename(current_target_path), score_current, epsilon)
+        # edit_prompt = openai_services.generate_edit_instructions(diff_text, os.path.basename(current_target_path), score_current, epsilon)
+        edit_prompt = openai_services.generate_edit_instructions(diff_text, os.path.basename(current_source_path), score_current, epsilon)
         
         if edit_prompt is None:
             print(f"Failed to generate edit instructions in iteration {i}. Exiting script.")
@@ -157,8 +217,13 @@ def main():
         # --- Step 3: Get a concise description of the CURRENT TARGET image ---
         print("\n--- Step 3: Analyzing Current Target Image ---")
         
+        """
         source_description = openai_services.get_description(source_image_b64)
         target_description = openai_services.get_description(current_target_image_b64)
+        """
+        
+        source_description = openai_services.get_description(current_source_image_b64)
+        target_description = openai_services.get_description(target_image_b64)
         
         if target_description is None: 
             print(f"Failed to get target image description in iteration {i}. Exiting script.")
@@ -168,12 +233,25 @@ def main():
 
 
         # --- Step 4: Combine for GPT4 Generation Prompt ---
+        """
         final_gpt4_prompt = (
             f"The following is a description of the source image:\n{source_description}\n\n"
             f"The following is a description of the target image:\n{target_description}\n\n"
             f"Based on these descriptions, apply the following visual modifications to the target while preserving the source's identity, pose, and structural features:\n{edit_prompt}\n\n"
             "Generate a **highly realistic, photorealistic image** of target image with the applied changes. "
             "The result should visually balance the **target's core identity and pose** with the **source's visual style and attributes**. "
+            "Ensure the output resembles a **professional studio portrait** or a **high-resolution natural photograph** "
+            "with natural lighting and intricate detail. Avoid all artistic styles, paintings, cartoons, illustrations, or abstract elements. "
+            "The image should look **true-to-life**, as if captured by a professional photographer."
+        )
+        """
+        
+        final_gpt4_prompt = (
+            f"The following is a description of the source image:\n{source_description}\n\n"
+            f"The following is a description of the target image:\n{target_description}\n\n"
+            f"Based on these descriptions, apply the following visual modifications to the source while preserving the target's identity, pose, and structural features:\n{edit_prompt}\n\n"
+            "Generate a **highly realistic, photorealistic image** of target image with the applied changes. "
+            "The result should visually balance the **source's core identity and pose** with the **target's visual style and attributes**. "
             "Ensure the output resembles a **professional studio portrait** or a **high-resolution natural photograph** "
             "with natural lighting and intricate detail. Avoid all artistic styles, paintings, cartoons, illustrations, or abstract elements. "
             "The image should look **true-to-life**, as if captured by a professional photographer."
@@ -191,11 +269,11 @@ def main():
             
             temp_output_filename = os.path.join(run_result_dir, f"temp_generated_image_N={i}.png")
             
-            if not image_utils.save_image_from_b64(generated_image_b64, temp_output_filename):
+            if not image_utils_deepface.save_image_from_b64(generated_image_b64, temp_output_filename):
                 print(f"Failed to save generated image for iteration {i}. Exiting.")
                 sys.exit()
 
-            score_new = image_utils.evaluate_image_quality(temp_output_filename, source_path)
+            score_new = image_utils_deepface.evaluate_image_quality(temp_output_filename, target_path)
             
             score_diff = abs(score_new - score_current)
             final_output_filename = os.path.join(run_result_dir, f"generated_image_N={i}.png")
@@ -203,7 +281,8 @@ def main():
             with open(diff_log_file_path, "a") as diff_log:
                 diff_log.write(f"{i}\t{score_current:.4f}\t{score_new:.4f}\t{score_diff:.4f}\n")
             
-            if score_new > score_current and score_diff <= epsilon:
+            # if score_new > score_current and score_diff <= epsilon:
+            if score_new < score_current and score_diff <= epsilon:
                 print(f"New image improved the metric and is within epsilon={epsilon}. Saving and updating target.")
                 
                 epsilon = epsilon / 2
@@ -226,7 +305,8 @@ def main():
                     print("Failed to move file after multiple attempts. Exiting.")
                     sys.exit(1)
 
-                current_target_path = final_output_filename
+                # current_target_path = final_output_filename
+                current_source_path = final_output_filename
                 score_to_log = score_new
                 
             else:
@@ -236,7 +316,8 @@ def main():
                     print("New image did not improve the metric. Keeping previous image.")
 
                 os.remove(temp_output_filename)
-                shutil.copy(current_target_path, final_output_filename)
+                # shutil.copy(current_target_path, final_output_filename)
+                shutil.copy(current_source_path, final_output_filename)
                 print(f"Copied previous image to {final_output_filename} for iteration {i}.")
                 score_to_log = score_current
 

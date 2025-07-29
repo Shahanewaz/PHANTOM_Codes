@@ -2,6 +2,7 @@ import os
 
 # --- OpenAI API Key ---
 OPENAI_API_KEY = ''
+# OPENAI_API_KEY = ''
 
 # --- Directory Paths ---
 # Directory containing source images (e.g., CelebA-HQ)
@@ -36,7 +37,7 @@ GPT4_SIZE = "1024x1024"
 GPT4_QUALITY = "auto"
 
 # --- Iteration Settings ---
-NUM_ITERATIONS = 20
+NUM_ITERATIONS = 15
 PERCENTAGE = 0.35
 MAX_ATTEMPTS = 10
 EPSILON_THRES = 0.01
