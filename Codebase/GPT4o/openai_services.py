@@ -68,24 +68,6 @@ def generate_edit_instructions(diff_text, source_img_name, source_score, epsilon
     Generates clear edit instructions based on visual differences using GPT-4o.
     """
     
-    """
-    system_prompt = (
-        "You are a visual editing assistant. Your task is to convert visual difference descriptions "
-        "into clear, direct edit instructions for transforming a **target image of an individual** "
-        "to resemble a **source image of an individual**. Identify the visual attributes of the individual "
-        "in the source image and provide instructions to apply those attributes to the individual in the target image. "
-        "Do not mention 'the source image' or 'the first image' explicitly in the instructions as a reference. "
-        "Just state what needs to be changed in the target image to make the individual within it match the individual in the source."
-        "The resulting image should reflect a balance between the original identity, pose, and structure of the target, and the key visual features (like hairstyle, expression, clothing, or background) of the source.\n\n"
-        "For example, if the source image shows a person with blond hair and the target shows a person with brown hair, "
-        "instead of saying:\n- 'Change the hair to match that of the source image.'\n"
-        "Say:\n- 'Change the hair color to blond and adjust the style accordingly.'\n\n"
-        "Focus on direct, visual instructions for edits that bring the individual in the target image closer "
-        "to the individual's appearance in the source image. Avoid comparisons or references to the original images "
-        "in the final instructions themselves."
-    )
-    """
-    
     system_prompt = (
         "You are a visual editing assistant. Your task is to convert visual difference descriptions "
         "into clear, direct edit instructions for transforming a **source image of an individual** "
@@ -102,30 +84,6 @@ def generate_edit_instructions(diff_text, source_img_name, source_score, epsilon
         "in the final instructions themselves."
     )
     
-    """
-    system_prompt = (
-        "You are a visual editing assistant. Your task is to convert visual difference descriptions "
-        "into clear, direct edit instructions for transforming a **target image of an individual** "
-        "to resemble a **source image of an individual**. Identify the visual attributes of the individual "
-        "in the source image and provide instructions to apply those attributes to the individual in the target image. "
-        "Do not mention 'the source image' or 'the first image' explicitly in the instructions as a reference. "
-        "Just state what needs to be changed in the target image to make the individual within it match the individual in the source."
-        "The resulting image should reflect a balance between the original identity, pose, and structure of the target, and the key visual features (like hairstyle, expression, clothing, or background) of the source.\n\n"
-    )
-    """
-    
-    """
-    user_prompt = (
-        f"The current target image is: {target_img_name}.\n"
-        f"The similarity score of the target image (relative to the source) is: {target_score:.4f}.\n"
-        f"The maximum allowed score change for the next edit is: {epsilon}.\n\n"
-        f"Visual differences between the source and target:\n{diff_text}\n\n"
-        "Based on these differences, generate an edit prompt that provides direct, visual instructions "
-        f"for editing the image, but ensure the visual change is subtle enough that the new image's similarity score remains within epsilon={epsilon} of the current target. "
-        "**IMPORTANT:** The edit should not only stay within the allowed score distance (epsilon), but also improve the similarity score—that is, the new similarity score should be higher than the current score."
-    )
-    """
-    
     user_prompt = (
         f"The current source image is: {source_img_name}.\n"
         f"The similarity score of the source image (relative to the target) is: {source_score:.4f}.\n"
@@ -135,17 +93,6 @@ def generate_edit_instructions(diff_text, source_img_name, source_score, epsilon
         f"for editing the image, but ensure the visual change is subtle enough that the new image's similarity score remains within epsilon={epsilon} of the current source image. "
         "**IMPORTANT:** The edit should not only stay within the allowed score distance (epsilon), but also reduce the distance further — that is, the new distance should be lower than the current distance."
     )
-    
-    """
-    user_prompt = (
-        f"The current target image is: {target_img_name}.\n"
-        f"The similarity score of the target image (relative to the source) is: {target_score:.4f}.\n"
-        f"The maximum allowed score change for the next edit is: {epsilon}.\n\n"
-        f"Visual differences between the source and target:\n{diff_text}\n\n"
-        "Based on these differences, generate an edit prompt that provides direct, visual instructions "
-        f"for editing the image, but ensure the visual change is subtle enough that the new image's similarity score remains within epsilon={epsilon} of the current target. "
-    )
-    """
     
     try:
         response = openai.ChatCompletion.create(
