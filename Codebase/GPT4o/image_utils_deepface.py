@@ -43,6 +43,9 @@ def save_image_from_b64(image_b64, save_path):
         return False
 
 def evaluate_image_quality(image_path1, image_path2):
+    """
+    Computes the facial similarity score (distance) between two images using DeepFace with the Facenet model
+    """
     result = DeepFace.verify(img1_path = image_path1, img2_path = image_path2, model_name = 'Facenet')
     score = result['distance']
     return score
