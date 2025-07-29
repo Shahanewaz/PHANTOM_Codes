@@ -2,10 +2,8 @@ import os
 
 # --- OpenAI API Key ---
 OPENAI_API_KEY = ''
-# OPENAI_API_KEY = ''
 
 # --- Directory Paths ---
-# Directory containing source images (e.g., CelebA-HQ)
 SOURCE_IMAGES_DIR = "../../CelebA-HQ/celeba_hq_256/race_african/female"
 TARGET_IMAGES_DIR = "../../CelebA-HQ/celeba_hq_256/race_caucasian/female"
 
