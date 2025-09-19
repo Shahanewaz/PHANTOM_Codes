@@ -86,7 +86,7 @@ PSNR-SIG metric enhances traditional PSNR by incorporating structural informatio
 
 ## LLM-Based Perceptual Similarity
 
-Alongside PSNR-SIG, we use state-of-the-art LLMs: GPT-4o, Claude 3.7 Sonnet, and Gemini 2.5 Flash, to assess perceptual similarity. Each model is prompted with a standardized query to rate similarity between SOURCE and OUTPUT images and TARGET and OUTPUT images on a [0, 1] scale.
+Alongside PSNR-SIG, we use state-of-the-art LLMs: GPT-5, Claude 3.7 Sonnet, and Gemini 2.5 Flash, to assess perceptual similarity. Each model is prompted with a standardized query to rate similarity between SOURCE and OUTPUT images and TARGET and OUTPUT images on a [0, 1] scale.
 
 # Main Results
 
@@ -114,7 +114,7 @@ Alongside PSNR-SIG, we use state-of-the-art LLMs: GPT-4o, Claude 3.7 Sonnet, and
 <thead>
 <tr>
   <th rowspan="2">Setting</th>
-  <th colspan="2">GPT-4o</th>
+  <th colspan="2">GPT-5</th>
   <th colspan="2">Claude 3.7 Sonnet</th>
   <th colspan="2">Gemini 2.5 Flash</th>
 </tr>
@@ -127,19 +127,19 @@ Alongside PSNR-SIG, we use state-of-the-art LLMs: GPT-4o, Claude 3.7 Sonnet, and
 <tbody align="center">
 <tr>
   <td>Within-Group</td>
-  <td>0.04</td><td>0.32 <span style="color:green;">↑</span></td>
+  <td>0.14</td><td>0.32 <span style="color:green;">↑</span></td>
   <td>0.15</td><td>0.58 <span style="color:green;">↑</span></td>
   <td>0.12</td><td>0.46 <span style="color:green;">↑</span></td>
 </tr>
 <tr>
   <td>Across-Gender</td>
-  <td>0.00</td><td>0.28 <span style="color:green;">↑</span></td>
+  <td>0.08</td><td>0.28 <span style="color:green;">↑</span></td>
   <td>0.08</td><td>0.57 <span style="color:green;">↑</span></td>
   <td>0.04</td><td>0.38 <span style="color:green;">↑</span></td>
 </tr>
 <tr>
   <td>Across-Race</td>
-  <td>0.01</td><td>0.20 <span style="color:green;">↑</span></td>
+  <td>0.10</td><td>0.20 <span style="color:green;">↑</span></td>
   <td>0.11</td><td>0.48 <span style="color:green;">↑</span></td>
   <td>0.05</td><td>0.39 <span style="color:green;">↑</span></td>
 </tr>
