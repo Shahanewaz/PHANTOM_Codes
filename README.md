@@ -171,3 +171,7 @@ We quantitatively assessed photorealism using Naturalness Image Quality Evaluato
 | Within-Group |  4.67  |   6.02   |
 
 </div>
+
+
+## Analysis Module: Instruction Synthesis Study (GPT-4o vs GPT-5)
+
