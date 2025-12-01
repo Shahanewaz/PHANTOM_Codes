@@ -191,9 +191,26 @@ The Prompt-Guided Update Module applies these instructions using *OmniGen2* to g
 |:------------------------:|:--------------------------------:|:-------------------------------:|
 | 0.82 [0.77, 0.87]        | 0.63 [0.57, 0.66]                | 0.60 [0.55, 0.66]               |
 
-<p align="center"><b>Table 5:</b> Within-group results (mean similarity with 95% confidence intervals) using OmniGen2 as the fixed image generator. Higher values indicate better performance.</p>
+<div align="center">
 
-| **Chosen LLM**        | Mean similarity (GPT-4o) | Mean similarity (GPT-5) |
-|:---------------------:|:-------------------------:|:-------------------------:|
-| Claude 3.7 Sonnet     | 0.46 [0.36, 0.57]         | 0.51 [0.41, 0.61]         |
-| Gemini 2.5 Flash      | 0.56 [0.44, 0.69]         | 0.58 [0.49, 0.68]         |
+<p><b>Table 5:</b> Within-group results (mean similarity with 95% confidence intervals) using OmniGen2 as the fixed image generator. Higher values indicate better performance.</p>
+
+<table>
+<tr>
+  <th>Chosen LLM</th>
+  <th>Mean similarity (GPT-4o)</th>
+  <th>Mean similarity (GPT-5)</th>
+</tr>
+<tr>
+  <td>Claude 3.7 Sonnet</td>
+  <td>0.46 [0.36, 0.57]</td>
+  <td>0.51 [0.41, 0.61]</td>
+</tr>
+<tr>
+  <td>Gemini 2.5 Flash</td>
+  <td>0.56 [0.44, 0.69]</td>
+  <td>0.58 [0.49, 0.68]</td>
+</tr>
+</table>
+
+</div>
