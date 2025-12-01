@@ -177,4 +177,11 @@ We quantitatively assessed photorealism using Naturalness Image Quality Evaluato
 
 We perform a controlled component swap to assess whether the instruction generator inside the Analysis Module affects identity transfer when the editor is fixed. In the within-group setting, we fix the source and the target and hold all prompts and templates constant. At each iteration $(X_i, X_T)$ is provided to the Analysis Module, which uses an LLM to derive targeted edit instructions from the visual differences while adhering to the FND constraint so that the output moves toward the target without departing excessively from the source.
 
-The Prompt-Guided Update Module applies these instructions using *OmniGen2* to generate the updated image. To isolate instruction synthesis effects, only the instruction source (GPT-4o vs. GPT-5) is varied, while the editor, decoding, and other settings remain fixed. Final image–target similarity is then assessed by two independent judges, Claude 3.7 Sonnet and Gemini 2.5 Flash, following the same protocol.
+The Prompt-Guided Update Module applies these instructions using *OmniGen2* to generate the updated image. To isolate instruction synthesis effects, only the instruction source (GPT-4o vs. GPT-5) is varied, while the editor, decoding, and other settings remain fixed. Final image-target similarity is then assessed by two independent judges, Claude 3.7 Sonnet and Gemini 2.5 Flash, following the same protocol.
+
+<p align="center">
+  <img src="images/GPT-Compare.PNG" width="60%">
+</p>
+
+<p align="center"><b>Figure:</b> <i>Within-group comparison with</i> <b>OmniGen2</b> <i>fixed as the image generator. Columns (left to right): Source, GPT-4o output (FND = 0.54), GPT-5 output (FND = 0.37), Target. Initial source-to-target FND = 0.75.</i></p>
+
