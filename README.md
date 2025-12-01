@@ -1,7 +1,7 @@
 # PHANTOM: Prompt-based Human Attribute Navigation for Targeted Obfuscation with Multimodal Large Language Models
 This repository contains the codebase for the manuscript titled **"PHANTOM: Prompt-based Human Attribute Navigation for Targeted Obfuscation with Multimodal Large Language Models."**
 
-In this framework, we consider an attacker image (referred to as the *source image* in the manuscript) and a victim image (the *target image* in the manuscript). The purpose of PHANTOM is to generate an intermediate image that an attacker can use to effectively impersonate the victim by systematically modifying human attributes guided by multimodal large language models.
+In this framework, we consider an attacker image (referred to as the *source image* in the manuscript) and a victim image (the *target image* in the manuscript). The goal of PHANTOM is to generate an intermediate image that enables the source to converge toward the target identity by systematically modifying human attributes under the guidance of multimodal large language models.
 
 <div style="text-align: center;">
 
@@ -12,10 +12,10 @@ In this framework, we consider an attacker image (referred to as the *source ima
     vertical-align: top;
   ">
     <img src="Figures/ex1.png"
-         alt="Impersonation within the same gender"
+         alt="Transformation within the same gender"
          style="width: 100%;">
     <figcaption style="font-style: italic; margin-top: 0.5em; text-align: center;">
-      (a) Impersonation within the same gender
+      (a) Transformation within the same gender
     </figcaption>
   </figure>
 
@@ -26,16 +26,16 @@ In this framework, we consider an attacker image (referred to as the *source ima
     vertical-align: top;
   ">
     <img src="Figures/ex2.png"
-         alt="Impersonation with different genders"
+         alt="Transformation with different genders"
          style="width: 100%;">
     <figcaption style="font-style: italic; margin-top: 0.5em; text-align: center;">
-      (b) Impersonation with different genders
+      (b) Transformation with different genders
     </figcaption>
   </figure>
 
 </div>
 <p align="center" style="font-style: bold;">
-  Figure 1. PHANTOM-generated impersonation attacks in same-gender (a) and different-gender (b) scenarios.
+  Figure 1. PHANTOM-generated transformation attacks in same-gender (a) and different-gender (b) scenarios.
 </p>
 
 # Flowchart of PHANTOM
@@ -44,9 +44,9 @@ PHANTOM is operated through the following sequence of integrated modules:
 
 - **Initialization Module:** Each iteration in PHANTOM begins with the current updated image, along with the fixed source and target images.
 
-- **Analysis Module:** Next, PHANTOM compares the source and target images using the LLM, identifying key visual differences (e.g., facial structure, hairstyle, skin tone, background) and translating them into precise editing instructions. It also evaluates how each change affects SSIM to prioritize edits that better align the source with the target.
+- **Analysis Module:** Next, PHANTOM compares the source and target images using the LLM, identifying key visual differences (e.g., facial structure, hairstyle, skin tone, background) and translating them into precise editing instructions. It also evaluates how each change affects FaceNet embedding distance (FND) to prioritize edits that better align the source with the target.
 
-- **Prompt-Guided Update Module:** At this module, the LLM generates an updated image based on the latest edit instructions. PHANTOM then evaluates its SSIM, and if the result satisfies the imposed constraints, the image is accepted for the next editing round.
+- **Prompt-Guided Update Module:** At this module, the LLM generates an updated image based on the latest edit instructions. PHANTOM then evaluates its FND, and if the result satisfies the imposed constraints, the image is accepted for the next editing round.
 
 We will show the flowchart below.
 
