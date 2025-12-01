@@ -183,5 +183,17 @@ The Prompt-Guided Update Module applies these instructions using *OmniGen2* to g
   <img src="Figures/GPT-Compare.PNG" width="60%">
 </p>
 
-<p align="center"><b>Figur 4e:</b> <i>Within-group comparison with</i> <b>OmniGen2</b> <i>fixed as the image generator. Columns (left to right): Source, GPT-4o output (FND = 0.54), GPT-5 output (FND = 0.37), Target. Initial source-to-target FND = 0.75.</i></p>
+<p align="center"><b>Figur 4:</b> Within-group comparison with <b>OmniGen2</b> fixed as the image generator. Columns (left to right): Source, GPT-4o output (FND = 0.54), GPT-5 output (FND = 0.37), Target. Initial source-to-target FND = 0.75.</p>
 
+<p align="center"><b>Table 4:</b> Mean FND (with 95% confidence intervals) for the within-group setting. Lower values indicate better performance.</p>
+
+| Mean FND (Source–Target) | Mean FND (GPT-4o Output–Target) | Mean FND (GPT-5 Output–Target) |
+|--------------------------|----------------------------------|---------------------------------|
+| 0.82 [0.77, 0.87]        | 0.63 [0.57, 0.66]                | 0.60 [0.55, 0.66]               |
+
+<p align="center"><b>Table 5:</b> Within-group results (mean similarity with 95% confidence intervals) using OmniGen2 as the fixed image generator. Higher values indicate better performance.</p>
+
+| **Chosen LLM**        | Mean similarity (GPT-4o) | Mean similarity (GPT-5) |
+|-----------------------|---------------------------|---------------------------|
+| Claude 3.7 Sonnet     | 0.46 [0.36, 0.57]         | 0.51 [0.41, 0.61]         |
+| Gemini 2.5 Flash      | 0.56 [0.44, 0.69]         | 0.58 [0.49, 0.68]         |
