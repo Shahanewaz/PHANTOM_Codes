@@ -187,11 +187,13 @@ The Prompt-Guided Update Module applies these instructions using *OmniGen2* to g
 
 <p align="center"><b>Table 4:</b> Mean FND (with 95% confidence intervals) for the within-group setting. Lower values indicate better performance.</p>
 
+<div align="center">
+
 | Mean FND (Source–Target) | Mean FND (GPT-4o Output–Target) | Mean FND (GPT-5 Output–Target) |
 |:------------------------:|:--------------------------------:|:-------------------------------:|
 | 0.82 [0.77, 0.87]        | 0.63 [0.57, 0.66]                | 0.60 [0.55, 0.66]               |
 
-<div align="center">
+</div>
 
 <p><b>Table 5:</b> Within-group results (mean similarity with 95% confidence intervals) using OmniGen2 as the fixed image generator. Higher values indicate better performance.</p>
 
