@@ -195,7 +195,9 @@ The Prompt-Guided Update Module applies these instructions using *OmniGen2* to g
 
 </div>
 
-<p><b>Table 5:</b> Within-group results (mean similarity with 95% confidence intervals) using OmniGen2 as the fixed image generator. Higher values indicate better performance.</p>
+<p align="center"><b>Table 5:</b> Within-group results (mean similarity with 95% confidence intervals) using OmniGen2 as the fixed image generator. Higher values indicate better performance.</p>
+
+<div align="center">
 
 <table>
 <tr>
