@@ -80,21 +80,21 @@ To implement the methodology described, execute the following script with the sp
 
 # Evaluation Metrics
 
-## Structure-Aware Image Similarity (PSNR-SIG)
+## Structure-Aware Image Similarity
 
-PSNR-SIG metric enhances traditional PSNR by incorporating structural information. Unlike classical PSNR, which may miss perceptually important differences, PSNR-SIG better reflects human perception by emphasizing structural fidelity. This makes it well-suited for PHANTOM, where preserving both global and local details is critical for realistic identity impersonation.
+To evaluate image similarity, we use a PSNR-based similarity score defined as a monotonic mapping from MSE to a normalized value in $(0,1]$. Unlike classical PSNR in decibels, which can be difficult to interpret across image pairs, this bounded score directly reflects relative reconstruction fidelity. In addition, it provides a more stable signal for guiding iterative refinements during prompt-based updates. Its ability to couple pixel-level accuracy with a smooth similarity scale ensures that identity transformations remain natural. This is well-suited for PHANTOM, where preserving global and local details is critical for realistic identity transformation.
 
 ## LLM-Based Perceptual Similarity
 
-Alongside PSNR-SIG, we use state-of-the-art LLMs: GPT-5, Claude 3.7 Sonnet, and Gemini 2.5 Flash, to assess perceptual similarity. Each model is prompted with a standardized query to rate similarity between SOURCE and OUTPUT images and TARGET and OUTPUT images on a [0, 1] scale.
+Alongside PSNR-based similarity, we use state-of-the-art LLMs: GPT-5, Claude 3.7 Sonnet, and Gemini 2.5 Flash, to assess perceptual similarity. Each model is prompted with a standardized query to rate similarity between SOURCE and OUTPUT images and TARGET and OUTPUT images on a [0, 1] scale.
 
 # Main Results
 
-## PSNR-SIG Performance Analysis
+## Structure-Aware Similarity Performance Analysis
 
 <div align="center">
 
-**Table 1:** Mean PSNR-SIG similarity scores between source–target, output–target, and output–source image pairs for each experimental setting. <b><span style="color:green;">↑</span></b> marks a substantial increase in similarity, whereas <span style="color:green;">✔</span> indicates significant similarity.
+**Table 1:** Mean PSNR-based similarity scores between source–target, output–target, and output–source image pairs for each experimental setting. <b><span style="color:green;">↑</span></b> marks a substantial increase in similarity, whereas <span style="color:green;">✔</span> indicates significant similarity.
 
 | **Setting**     | **Src–Tgt** | **Out–Tgt**       | **Out–Src**       |
 |-----------------|:-----------:|:-----------------:|:-----------------:|
