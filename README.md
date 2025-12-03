@@ -157,7 +157,7 @@ After deriving the optimized edit prompt with PHANTOM, we initially used GPT-4o 
 </p>
 
 <p align="center" style="font-weight: bold;">
-  Figure 3. Comparison of PHANTOM-optimized edits using the same prompt: source image, GPT-4o output, OmniGen2 output, and target image (left to right). GPT-4o better captures the target image’s gravitas, while OmniGen2 struggles to preserve its emotional fidelity.
+  Figure 3. Comparison of PHANTOM-optimized edits using the same prompt: source image, GPT-4o output, OmniGen2 output, and target image (left to right). OmniGen2 preserves the target’s high-level semantics and specified modifications, achieving quality comparable to the GPT-4o outputs.
 </p>
 
 We quantitatively assessed photorealism using Naturalness Image Quality Evaluator (NIQE) scores in a within-group setting. GPT-4o achieved a mean NIQE score of 4.67, demonstrating superior alignment with natural image statistics, whereas OmniGen2 scored 6.02, indicating slight smoothing. Nonetheless, both maintained good lighting consistency and color fidelity, affirming OmniGen2 as a viable open-source alternative.
