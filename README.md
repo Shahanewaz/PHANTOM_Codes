@@ -1,5 +1,5 @@
-# PHANTOM: Prompt-based Human Attribute Navigation for Targeted Obfuscation with Multimodal Large Language Models
-This repository contains the codebase for the manuscript titled **"PHANTOM: Prompt-based Human Attribute Navigation for Targeted Obfuscation with Multimodal Large Language Models."**
+# An Iterative Framework for Controlled Attribute Transformation using Multimodal Models
+This repository contains the codebase for the manuscript titled **"An Iterative Framework for Controlled Attribute Transformation using Multimodal Models."**
 
 In this framework, we consider an attacker image (referred to as the *source image* in the manuscript) and a victim image (the *target image* in the manuscript). The goal of PHANTOM is to generate an intermediate image that enables the source to converge toward the target identity by systematically modifying human attributes under the guidance of multimodal large language models.
 
